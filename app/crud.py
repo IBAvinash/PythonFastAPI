@@ -46,13 +46,7 @@ def create_employee(db: Session, employee: schemas.EmployeeCreate):
 
 def get_employees(db: Session):
     employees = db.query(models.Employee).options(joinedload(models.Employee.user)).all()
-    result = []
-
-    for emp in employees:
-        result.append({
-            "name": emp.name,
-            "position": emp.position,
-            "email": emp.user.email if emp.user else None
-        })
-
-    return result
+    return [
+        {"name": emp.name, "position": emp.position, "email": emp.user.email if emp.user else None}
+        for emp in employees
+    ]

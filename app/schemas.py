@@ -24,11 +24,10 @@ class EmployeeBase(BaseModel):
 class EmployeeCreate(EmployeeBase):
     user_id: int
 
-
-class Employee(EmployeeBase):
-    id: int
-    user_id: int
-    user_email: str | None = None  # ✅ only email
+class EmployeeOut(BaseModel):
+    name: str
+    position: str
+    email: str | None
 
     class Config:
         from_attributes = True
